@@ -1,0 +1,3 @@
+[submodule "themes/hexo-theme-vivia"]
+path = themes/hexo-theme-vivia
+url = git@github.com:saicaca/hexo-theme-vivia.git
