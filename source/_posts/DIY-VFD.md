@@ -1,7 +1,9 @@
 ---
 title: DIY VFD
 date: 2023-08-12 22:12:30
-tags: EE
+tags: 
+    - EE
+    - DIY
 photos:
     - /2023/08/12/DIY-VFD/process2.jpg
 ---

@@ -1,7 +1,9 @@
 ---
 title: Copper Artwork Made by Electrolysis
 date: 2022-12-15 12:00:36
-tags: Chemistry
+tags: 
+  - Chemistry
+  - DIY
 photos:
     - /2022/12/15/Copper-Artwork-Made-by-Electrolysis/4.jpg
 ---
@@ -29,5 +31,5 @@ MathJax = {
 };
 </script>
 <script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  src="/2022/12/15/Copper-Artwork-Made-by-Electrolysis/tex-chtml.js">
 </script>
