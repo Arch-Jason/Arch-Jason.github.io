@@ -1,0 +1,129 @@
+<!-- gallery.ejs -->
+<!-- 图集页面：支持 title + desc 结构，desc 仅在放大图中显示 -->
+
+<!-- LightGallery CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.3.0/css/lightgallery.min.css">
+
+<style>
+.gallery-container {
+  column-count: 3;
+  column-gap: 1rem;
+  padding: 1rem 0;
+}
+.gallery-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+  break-inside: avoid;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.gallery-item:hover {
+  transform: scale(1.03);
+}
+.gallery-item img {
+  width: 100%;
+  border-radius: 8px;
+}
+.gallery-caption {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.3rem;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .gallery-container {
+    column-count: 2;
+  }
+}
+@media (max-width: 480px) {
+  .gallery-container {
+    column-count: 1;
+  }
+}
+
+/* 缩略图横向排列 */
+.lg-thumb-outer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 5px 10px;
+}
+.lg-thumb {
+  display: inline-flex !important;
+  flex-direction: row;
+  align-items: center;
+}
+.lg-thumb-item {
+  display: inline-block;
+  margin-right: 5px;
+  width: 80px !important;
+  height: 60px !important;
+}
+.lg-thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.lg-sub-html h4 {
+  margin-top: 10px;
+}
+</style>
+
+<div id="content-body">
+  <article class="article article-type-page">
+    <div class="article-inner">
+      <div class="article-main">
+        <div>
+          <div class="gallery-container" id="lightgallery">
+            <% const lines = page.raw ? page.raw.split('\n') : page.content.split('\n');
+               for (let i = 0; i < lines.length; i++) {
+                 const imgLine = lines[i].trim();
+                 const titleLine = lines[i + 1] && !lines[i + 1].includes('<desc>') ? lines[i + 1].trim() : '';
+                 const descLine = lines[i + 2] && lines[i + 2].trim().startsWith('<desc>') ? lines[i + 2].trim() : '';
+
+                 const descMatch = descLine.match(/<desc>(.*?)<\/desc>/);
+                 const description = descMatch ? descMatch[1] : '';
+
+                 const imgMatch = imgLine.match(/!\[(.*?)\]\((.*?)(?:\s+\"(.*?)\")?\)/);
+                 if (imgMatch) {
+                   const alt = imgMatch[1];
+                   const imgSrc = imgMatch[2];
+                   const hoverTitle = imgMatch[3] || '';
+                   const title = titleLine || '';
+                   const popupContent = (title ? '<h4>' + title + '</h4>' : '') + (description ? '<p>' + description + '</p>' : '');
+            %>
+            <div class="gallery-item">
+              <a href="<%= imgSrc %>" data-sub-html='<%= popupContent %>'>
+                <img src="<%= imgSrc %>" alt="<%= alt %>" title="<%= hoverTitle %>">
+              </a>
+              <% if (title) { %>
+                <div class="gallery-caption"><%= title %></div>
+              <% } %>
+            </div>
+            <% i += (descLine ? 2 : (titleLine ? 1 : 0)); %>
+            <% } %>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- LightGallery JS (v2.3) -->
+<script src="/js/lightgallery.min.js"></script>
+<script src="/js/lg-zoom.min.js"></script>
+<script src="/js/lg-thumbnail.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    lightGallery(document.getElementById('lightgallery'), {
+      plugins: [lgZoom, lgThumbnail],
+      speed: 400,
+      selector: 'a'
+    });
+  });
+</script>

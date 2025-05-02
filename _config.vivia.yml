@@ -3,6 +3,7 @@ menu:                      # Links in the navigation bar
   Home: /
   # Archives: /archives
   About: /about
+  Gallery: /gallery
 # rss: /atom.xml
 
 home:
