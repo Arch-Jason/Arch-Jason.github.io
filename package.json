@@ -24,7 +24,7 @@
     "hexo-server": "^3.0.0",
     "hexo-symbols-count-time": "^0.7.1",
     "hexo-theme-landscape": "^1.0.0",
-    "sharp": "^0.34.1",
+    "sharp": "^0.34.3",
     "stylus": "^0.64.0"
   }
 }
