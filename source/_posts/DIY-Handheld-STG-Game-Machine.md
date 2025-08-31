@@ -4,6 +4,8 @@ date: 2024-12-14 21:13:25
 tags:
     - EE
     - DIY
+    - MCU
+    - STM32
 photos:
     - /2024/12/14/DIY-Handheld-STG-Game-Machine/1.png
 ---
