@@ -5,6 +5,15 @@ layout: gallery
 raw: true
 ---
 
+
+![](./photos/2026-01-23/DSC_3379.jpg)
+
+![](./photos/2026-01-23/DSC_3386.jpg)
+
+![](./photos/2026-01-18/DSC_3360.jpg)
+
+![](./photos/2026-01-18/DSC_3361.jpg)
+
 ![](./photos/2022-07-24/DSC_7826.png)
 
 ![](./photos/2023-07-21/DSC_9724.png)

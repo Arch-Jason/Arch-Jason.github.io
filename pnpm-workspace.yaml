@@ -1,0 +1,4 @@
+onlyBuiltDependencies:
+  - hexo-util
+  - highlight.js
+  - sharp
