@@ -24,7 +24,7 @@ hue: 250                         # The hue of the theme color (e.g. red: 0, oran
 
 # Personal info
 avatar: /avatar.png                 # Path to the avatar image relative to /source
-author: Qianyi Jin
+author: Arch-Jason
 subtitle: My personal website.
 links:
   - name: Bilibili

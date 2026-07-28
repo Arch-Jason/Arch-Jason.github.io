@@ -2,23 +2,9 @@
 <!-- 图集页面：支持 title + desc 结构，desc 仅在放大图中显示 -->
 
 <!-- LightGallery CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.3.0/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.9.0/css/lightgallery.min.css">
 
 <style>
-.gallery-container {
-  column-count: 3;
-  column-gap: 1rem;
-  padding: 1rem 0;
-}
-.gallery-item {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 1rem;
-  break-inside: avoid;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
 .gallery-item:hover {
   transform: scale(1.03);
 }
@@ -32,14 +18,26 @@
   margin-top: 0.3rem;
   text-align: center;
 }
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.gallery-item {
+  width: calc(33.333% - 1rem);
+}
+
 @media (max-width: 768px) {
-  .gallery-container {
-    column-count: 2;
+  .gallery-item {
+    width: calc(50% - 1rem);
   }
 }
+
 @media (max-width: 480px) {
-  .gallery-container {
-    column-count: 1;
+  .gallery-item {
+    width: 100%;
   }
 }
 
@@ -73,6 +71,35 @@
 }
 </style>
 
+<script>
+function masonryLayout() {
+  const container = document.querySelector('.gallery-container');
+  const items = [...container.children];
+
+  const cols =
+    window.innerWidth <= 480 ? 1 :
+    window.innerWidth <= 768 ? 2 : 3;
+
+  const heights = Array(cols).fill(0);
+
+  items.forEach((item, index) => {
+    const col = index % cols;
+
+    item.style.position = 'absolute';
+    item.style.left = `${col * (100 / cols)}%`;
+    item.style.top = `${heights[col]}px`;
+
+    heights[col] += item.offsetHeight + 16;
+  });
+
+  container.style.position = 'relative';
+  container.style.height = Math.max(...heights) + 'px';
+}
+
+window.addEventListener('load', masonryLayout);
+window.addEventListener('resize', masonryLayout);
+</script>
+
 <div id="content-body">
   <article class="article article-type-page">
     <div class="article-inner">
@@ -97,7 +124,7 @@
                    const popupContent = (title ? '<h4>' + title + '</h4>' : '') + (description ? '<p>' + description + '</p>' : '');
             %>
             <div class="gallery-item">
-              <a href="<%= imgSrc %>" data-sub-html='<%= popupContent %>'>
+              <a href="<%= imgSrc %>" data-lg-size="80-60" data-sub-html='<%= popupContent %>'>
                 <img src="<%= imgSrc %>" alt="<%= alt %>" title="<%= hoverTitle %>">
               </a>
               <% if (title) { %>

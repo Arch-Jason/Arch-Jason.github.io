@@ -1,3 +1,7 @@
+allowBuilds:
+  hexo-util: true
+  highlight.js: true
+  sharp: true
 onlyBuiltDependencies:
   - hexo-util
   - highlight.js
